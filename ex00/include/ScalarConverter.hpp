@@ -3,6 +3,9 @@
 #include <string>
 #include <iostream>
 #include <cctype>
+#include <cstdlib>
+#include <limits>
+#include <cmath>
 
 class ScalarConverter {
 
