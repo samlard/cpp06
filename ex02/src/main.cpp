@@ -13,17 +13,13 @@ int main(void)
     }
     {
         Base *d = new B();
-        try
-        {
-            A &ref = dynamic_cast<A &>(*d);
-            (void)ref;
-            std::cout << "HEY" << std::endl;
-        }
-        catch(std::bad_cast &bd)
-        {
-            delete d;
-            std::cout << "smth went wrong " << bd.what() << std::endl;
-        }
+        A &ref = dynamic_cast<A &>(*d);
+        (void)ref;
+        std::cout << "HEY" << std::endl;
+    }
+    {
+        Base &rf = * generate(); 
+        identify(rf);
     }
     return (0);
 }
