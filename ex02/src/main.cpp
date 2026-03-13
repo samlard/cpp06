@@ -12,13 +12,13 @@ int main(void)
         delete c;
     }
     {
-        Base *d = new B();
-        A &ref = dynamic_cast<A &>(*d);
-        (void)ref;
+        Base &d = * new C;
+        identify(d);
         std::cout << "HEY" << std::endl;
     }
     {
-        Base &rf = * generate(); 
+        Base &rf = * generate();
+
         identify(rf);
     }
     return (0);
