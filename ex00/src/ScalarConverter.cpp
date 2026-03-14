@@ -81,18 +81,18 @@ static bool is_float(const std::string &literal)
 {
     if (literal.empty() || literal[literal.size()-1] != 'f')
         return false;
-    
     std::string num = literal.substr(0, literal.size() - 1);
     if (num.empty())
         return false;
     bool has_dot = (num.find('.') != std::string::npos);
-    
     if (!has_dot)
         return false;
     errno = 0;
     char* endptr;
     std::strtof(num.c_str(), &endptr);
-    return (*endptr == '\0' && errno != ERANGE);
+    if (errno == ERANGE || *endptr != '\0')
+        return false;
+    return true;
 }
 
 
@@ -148,25 +148,21 @@ void ScalarConverter::convert(const std::string &literal)
         std::cout << "Enter valid input plz" << std::endl;
         return;
     }
-
     if (is_literal(literal))
     {
         special_case(literal);
         return;
     }
-
     if (is_char(literal))
     {
         print_conversions("char", literal);
         return;
     }
-
     if (is_int(literal))
     {
         print_conversions("int", literal);
         return;
     }
-
     if (is_float(literal))
     {
         print_conversions("float", literal);

@@ -4,13 +4,9 @@
 
 int main()
 {
+    // Serializer s;
     Data d;
     d.id = 123;
-    //d.l = reinterpret_cast<long>(d.id); not valid reinterpret is for adress or pointer
-    // d.l = reinterpret_cast<long>(&d.id);
-
-    // d.l = 111111111111111;
-    // d.id = reinterpret_cast<int>(&d.l);
 
     std::cout << "Original Data pointer: " << &d << std::endl;
     std::cout << "Original Data id: " << d.id << std::endl;
@@ -25,6 +21,10 @@ int main()
         std::cout << "Success: deserialized pointer matches original!" << std::endl;
     else
         std::cout << "Error: pointers do not match." << std::endl;
-
+    {
+        uintptr_t fake = 12345678;
+        Data* ptr = Serializer::deserialize(fake);
+        std::cout << ptr->id;
+    }
     return 0;
 }
